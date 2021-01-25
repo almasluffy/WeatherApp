@@ -27,7 +27,7 @@ class WeatherListAdapter(
 
         fun bind(weather: Weather){
             cityName.text = weather.city_name
-            temp.text = weather.id.toString() + "K"
+            temp.text = weather.temperature.toString() + "K"
             savedDate.text = weather.saved_date
         }
 
