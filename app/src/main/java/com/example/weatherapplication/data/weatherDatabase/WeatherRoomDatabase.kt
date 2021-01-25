@@ -40,37 +40,4 @@ abstract class WeatherRoomDatabase: RoomDatabase() {
         }
 
     }
-
-//    private class WeatherDatabaseCallback(
-//        private val scope: CoroutineScope
-//    ): RoomDatabase.Callback() {
-//        override fun onOpen(db: SupportSQLiteDatabase) {
-//            super.onOpen(db)
-//            INSTANCE?.let { database ->
-//                scope.launch {
-//                    populateDatabase(database.weatherDao())
-//                }
-//            }
-//        }
-//
-//        suspend fun populateDatabase(weatherDao: WeatherDao) {
-//            weatherDao.deleteAll()
-//
-//            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-//            val currentDate = sdf.format(Date())
-//
-//            var weather = Weather(
-//                1,
-//                "Almaty",
-//                264.15,
-//                264.15,
-//                264.15,
-//                260.39,
-//                1031,
-//                currentDate
-//            )
-//
-//            weatherDao.insert(weather)
-//        }
-//    }
 }

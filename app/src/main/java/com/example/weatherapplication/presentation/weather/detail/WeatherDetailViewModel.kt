@@ -23,7 +23,5 @@ class WeatherDetailViewModel(private val weatherRepository: WeatherRepository): 
             }
         }
     }
-    override fun handleError(e: Throwable) {
 
-    }
 }

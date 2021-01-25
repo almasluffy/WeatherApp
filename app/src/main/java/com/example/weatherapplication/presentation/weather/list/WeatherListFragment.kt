@@ -9,14 +9,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.weatherapplication.R
 import com.example.weatherapplication.base.BaseFragment
 import com.example.weatherapplication.data.weatherDatabase.Weather
 import kotlinx.android.synthetic.main.fragment_weather_list.*
 import org.koin.android.ext.android.inject
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class WeatherListFragment : BaseFragment() {
@@ -24,7 +21,6 @@ class WeatherListFragment : BaseFragment() {
     private val viewModel: WeatherListViewModel by inject()
     private lateinit var navController: NavController
     private lateinit var rvWeather: RecyclerView
-//    private lateinit var srlMovies: SwipeRefreshLayout
 
     companion object {
         fun newInstance() : WeatherListFragment =
@@ -36,7 +32,6 @@ class WeatherListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_weather_list, container, false)
     }
 
@@ -48,27 +43,7 @@ class WeatherListFragment : BaseFragment() {
 
 
         saveWeather.setOnClickListener {
-
-            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-            val currentDate = sdf.format(Date())
-
-            viewModel.loadCurrentWeather()
-
-            var new_id = viewModel.max_ID + 1
-            var main = viewModel.main
-
-            var weather = Weather(
-                new_id,
-                "Almaty",
-                main.temp,
-                main.temp_min,
-                main.temp_max,
-                main.feels_like,
-                main.pressure,
-                currentDate
-            )
-            viewModel.insertWeather(weather)
-
+            viewModel.setCurrentWeather()
         }
     }
 
@@ -95,14 +70,9 @@ class WeatherListFragment : BaseFragment() {
 
     override fun bindViews(view: View) = with(view) {
         navController = Navigation.findNavController(this)
-        rvWeather = findViewById(R.id.recyclerView)
-        //srlMovies = findViewById(R.id.srlWeatherList)
+        rvWeather = findViewById(R.id.rvWeatherList)
         rvWeather.layoutManager = LinearLayoutManager(context)
 
-//        srlMovies.setOnRefreshListener {
-//            //weatherListAdapter.clearAll()
-//            viewModel.loadWeatherList()
-//        }
     }
 
 

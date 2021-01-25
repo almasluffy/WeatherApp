@@ -14,8 +14,6 @@ abstract class BaseViewModel: ViewModel() {
 
     protected val uiScope: CoroutineScope = CoroutineScope(coroutineContext)
 
-    protected abstract fun handleError(e: Throwable)
-
     override fun onCleared() {
         super.onCleared()
         parentJob.cancel()

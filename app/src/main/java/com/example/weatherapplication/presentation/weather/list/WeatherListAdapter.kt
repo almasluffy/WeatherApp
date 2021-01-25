@@ -2,14 +2,11 @@ package com.example.weatherapplication.presentation.weather.list
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.weatherapplication.R
 import com.example.weatherapplication.base.BaseViewHolder
 import com.example.weatherapplication.data.weatherDatabase.Weather
@@ -24,9 +21,15 @@ class WeatherListAdapter(
 
 
     inner class WeatherViewHolder(itemView: View): BaseViewHolder(itemView) {
-        val cityName: TextView = itemView.findViewById(R.id.cityName)
-        val temp: TextView = itemView.findViewById(R.id.temp)
-        val savedDate: TextView = itemView.findViewById(R.id.savedDate)
+        private val cityName: TextView = itemView.findViewById(R.id.cityName)
+        private val temp: TextView = itemView.findViewById(R.id.temp)
+        private val savedDate: TextView = itemView.findViewById(R.id.savedDate)
+
+        fun bind(weather: Weather){
+            cityName.text = weather.city_name
+            temp.text = weather.id.toString() + "K"
+            savedDate.text = weather.saved_date
+        }
 
         fun setItemClick(item: Weather) {
             itemView.setOnClickListener{
@@ -45,11 +48,9 @@ class WeatherListAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        val current = weatherList[position]
-        holder.cityName.text = current.city_name
-        holder.temp.text = current.id.toString() + "K"
-        holder.savedDate.text = current.saved_date
-        holder.setItemClick(current)
+        val weather = weatherList[position]
+        holder.bind(weather)
+        holder.setItemClick(weather)
     }
 
     internal fun setWeatherList(weatherList: List<Weather>) {
